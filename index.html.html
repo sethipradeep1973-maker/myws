@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Consultants — Accounting, Secretarial & Legal Consultancy, New Delhi</title>
+<meta name="description" content="Elite Consultants provides expert audit, taxation, valuation and financial advisory services to help businesses stay compliant and financially strong.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10233F;
+    --ink-soft:#2B3F5C;
+    --paper:#F6F2E9;
+    --paper-deep:#EFE9D9;
+    --brass:#A9802E;
+    --brass-deep:#8C6A22;
+    --brass-light:#C9A35C;
+    --slate:#52606D;
+    --line:#D9CFBB;
+    --line-dark:#2B3F5C;
+    --maroon:#7A2E2E;
+    --radius:2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--brass-deep);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:""; width:24px; height:1px; background:var(--brass-deep); display:inline-block;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+
+  /* ===== Seal / signature emblem ===== */
+  .seal{
+    width:64px; height:64px; flex:none;
+    border-radius:50%;
+    object-fit:cover;
+  }
+
+  /* ===== Letterhead strip ===== */
+  .letterhead{
+    background:var(--ink);
+    color:#DCE3EE;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.04em;
+  }
+  .letterhead .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:9px 32px;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .letterhead a{opacity:0.85;}
+  .letterhead a:hover{opacity:1; color:var(--brass-light);}
+
+  /* ===== Header / nav ===== */
+  header.site{
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:50;
+  }
+  header.site .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .seal{width:84px; height:84px; color:var(--ink);}
+  .brand-name{font-family:'Fraunces', serif; font-weight:600; font-size:26px; line-height:1.15;}
+  .brand-sub{font-family:'IBM Plex Mono', monospace; font-size:10.5px; font-weight:700; letter-spacing:normal; color:var(--slate); text-transform:uppercase;}
+
+  nav.primary ul{list-style:none; display:flex; gap:30px;}
+  nav.primary a{
+    font-size:14.5px; font-weight:500; color:var(--ink-soft);
+    position:relative; padding:4px 0;
+  }
+  nav.primary a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1.5px;
+    background:var(--brass); transition:width .25s ease;
+  }
+  nav.primary a:hover::after, nav.primary a:focus-visible::after{width:100%;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase;
+    padding:12px 22px;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    background:transparent;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease, transform .15s ease;
+  }
+  .btn:hover{background:var(--ink); color:var(--paper);}
+  .btn.solid{background:var(--ink); color:var(--paper);}
+  .btn.solid:hover{background:var(--brass-deep); border-color:var(--brass-deep); color:#fff;}
+  .btn.on-dark{border-color:var(--brass-light); color:var(--paper);}
+  .btn.on-dark:hover{background:var(--brass); border-color:var(--brass); color:var(--ink);}
+
+  .navtoggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .navtoggle span{display:block; width:24px; height:2px; background:var(--ink); margin:5px 0;}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero .wrap{
+    padding:96px 32px 88px;
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:48px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(34px, 4.6vw, 58px);
+    margin:22px 0 24px;
+    max-width:15ch;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--brass-deep);
+  }
+  .hero p.lede{
+    font-size:17px; color:var(--slate); max-width:46ch; margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .hero-seal-wrap{
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .hero-seal-wrap .seal{
+    width:min(320px, 88%); height:min(320px, 88%);
+    box-shadow:0 18px 40px rgba(16,35,63,0.18);
+  }
+
+  /* ===== Section scaffolding ===== */
+  section{padding:88px 0;}
+  section.tight{padding:64px 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:24px; margin-bottom:44px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(26px, 3vw, 38px); margin-top:12px;}
+  .section-head p{color:var(--slate); max-width:42ch;}
+
+  /* ===== Welcome / about ===== */
+  .about{background:var(--paper);}
+  .about-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;
+  }
+  .about-grid p{color:var(--slate); font-size:16px; margin-bottom:16px;}
+  .about-grid p:first-of-type{
+    font-family:'Fraunces', serif; font-size:22px; color:var(--ink); font-weight:400;
+    line-height:1.5;
+  }
+  .about-links{display:flex; gap:14px; margin-top:26px; flex-wrap:wrap;}
+  .why-grid{
+    margin-top:64px; padding-top:48px; border-top:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:36px;
+  }
+  .why-mark{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--brass-deep); margin-bottom:10px;}
+  .why-item h4{font-size:17px; font-weight:600; margin-bottom:8px;}
+  .why-item p{color:var(--slate); font-size:14px;}
+
+  /* ===== Services ledger ===== */
+  .ledger{background:var(--ink); color:var(--paper);}
+  .ledger .eyebrow{color:var(--brass-light);}
+  .ledger .eyebrow::before{background:var(--brass-light);}
+  .ledger .section-head h2{color:var(--paper);}
+  .ledger .section-head p{color:#B9C3D6;}
+  .ledger-list{border-top:1px solid rgba(246,242,233,0.18);}
+  .ledger-row{
+    display:grid; grid-template-columns:64px 1fr auto;
+    align-items:center;
+    gap:24px;
+    padding:26px 0;
+    border-bottom:1px solid rgba(246,242,233,0.18);
+    cursor:default;
+  }
+  .ledger-num{
+    font-family:'IBM Plex Mono', monospace; color:var(--brass-light); font-size:14px;
+  }
+  .ledger-name{font-family:'Fraunces', serif; font-size:22px; font-weight:500;}
+  .ledger-desc{
+    grid-column:2 / span 2;
+    max-height:0; overflow:hidden;
+    color:#C3CCDC; font-size:14.5px; max-width:60ch;
+    transition:max-height .35s ease, padding-top .35s ease;
+  }
+  .ledger-row.open .ledger-desc{max-height:120px; padding-top:12px;}
+  .ledger-mark{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--brass-light);
+    border:1px solid rgba(201,163,92,0.5); padding:6px 12px;
+    background:none; cursor:pointer; transition:background .2s ease, color .2s ease;
+  }
+  .ledger-row.open .ledger-mark, .ledger-mark:hover{background:var(--brass); color:var(--ink); border-color:var(--brass);}
+
+  /* ===== Sectors ===== */
+  .sectors{background:var(--paper-deep); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.03em;
+    padding:10px 16px; border:1px solid var(--line-dark); color:var(--ink-soft);
+    background:var(--paper);
+  }
+
+  /* ===== Stats band ===== */
+  .stats{background:var(--ink); color:var(--paper); padding:56px 0;}
+  .stats-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:24px; text-align:center;
+  }
+  .stat-num{font-family:'IBM Plex Mono', monospace; font-size:clamp(28px,3.4vw,40px); color:var(--brass-light);}
+  .stat-label{font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:#B9C3D6; margin-top:6px;}
+
+  /* ===== Process ===== */
+  .process{background:var(--paper);}
+  .process-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .process-step{background:var(--paper); padding:32px 28px;}
+  .process-num{font-family:'Fraunces', serif; font-size:34px; color:var(--brass-light); margin-bottom:14px;}
+  .process-step h4{font-size:17px; margin-bottom:8px;}
+  .process-step p{color:var(--slate); font-size:14px;}
+
+  /* ===== FAQ ===== */
+  .faq{background:var(--paper-deep); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .faq-list{border-top:1px solid var(--line); max-width:820px;}
+  .faq-row{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center; gap:24px;
+    padding:22px 0; font-family:'Fraunces', serif; font-size:18px; font-weight:500; color:var(--ink);
+  }
+  .faq-q .plus{font-family:'IBM Plex Mono', monospace; font-size:18px; color:var(--brass-deep); flex:none; transition:transform .2s ease;}
+  .faq-row.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0; overflow:hidden; color:var(--slate); font-size:14.5px; max-width:70ch;
+    transition:max-height .35s ease, padding-bottom .35s ease;
+  }
+  .faq-row.open .faq-a{max-height:160px; padding-bottom:22px;}
+
+  /* ===== Leadership ===== */
+  .leader{background:var(--paper);}
+  .leader-card{
+    display:grid; grid-template-columns:220px 1fr; gap:44px; align-items:center;
+    border:1px solid var(--line); padding:44px; background:var(--paper-deep);
+  }
+  .leader-portrait{
+    width:220px; height:220px; border-radius:50%;
+    object-fit:cover;
+    border:3px solid var(--brass);
+  }
+  .leader-info h3{font-size:28px; margin-bottom:4px;}
+  .leader-credentials{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--slate); margin-bottom:10px;}
+  .leader-role{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--brass-deep); letter-spacing:0.05em; margin-bottom:16px;}
+  .leader-info p{color:var(--slate); max-width:56ch;}
+  .leader-note{margin-top:28px; color:var(--slate); font-size:14.5px; text-align:center; max-width:64ch; margin-left:auto; margin-right:auto;}
+
+  /* ===== Testimonials ===== */
+  .testimonials{background:var(--paper-deep); border-top:1px solid var(--line);}
+  .t-scroll{
+    display:flex; gap:24px; overflow-x:auto; padding-bottom:14px; scroll-snap-type:x proximity;
+  }
+  .t-scroll::-webkit-scrollbar{height:6px;}
+  .t-scroll::-webkit-scrollbar-thumb{background:var(--line-dark); }
+  .t-card{
+    flex:0 0 340px; scroll-snap-align:start;
+    background:var(--paper); border:1px solid var(--line); padding:28px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .t-mark{font-family:'Fraunces', serif; font-size:40px; color:var(--brass); line-height:0.5; height:20px;}
+  .t-quote{color:var(--ink-soft); font-size:14.5px; flex:1;}
+  .t-name{font-weight:600; font-size:14px;}
+  .t-role{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--slate);}
+
+  /* ===== Call back / contact ===== */
+  .callback{background:var(--ink); color:var(--paper);}
+  .callback .eyebrow{color:var(--brass-light);}
+  .callback .eyebrow::before{background:var(--brass-light);}
+  .cb-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  .cb-grid h2{color:var(--paper); font-size:clamp(26px,3vw,36px); margin:12px 0 18px;}
+  .cb-grid p{color:#B9C3D6; margin-bottom:28px; max-width:44ch;}
+  .cb-services{display:flex; flex-wrap:wrap; gap:10px;}
+  .cb-services span{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; padding:8px 12px;
+    border:1px solid rgba(246,242,233,0.25); color:#DCE3EE;
+  }
+  .cb-form{background:var(--paper); color:var(--ink); padding:36px; border:1px solid rgba(246,242,233,0.2);}
+  .cb-form .field{margin-bottom:18px;}
+  .cb-form label{display:block; font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--slate); margin-bottom:8px;}
+  .cb-form input, .cb-form textarea{
+    width:100%; border:1px solid var(--line); background:var(--paper); padding:12px 14px;
+    font-family:'IBM Plex Sans', sans-serif; font-size:14.5px; color:var(--ink);
+  }
+  .cb-form input:focus, .cb-form textarea:focus{outline:2px solid var(--brass); outline-offset:1px; border-color:var(--brass);}
+  .cb-form textarea{resize:vertical; min-height:90px;}
+  .cb-form .btn{width:100%; justify-content:center;}
+
+  /* ===== Footer ===== */
+  footer{background:var(--paper); border-top:1px solid var(--line); padding:64px 0 28px;}
+  .footer-top{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:56px; margin-bottom:48px;
+  }
+  .footer-brand{display:flex; gap:14px; align-items:flex-start; margin-bottom:18px;}
+  .footer-brand .seal{width:44px; height:44px; color:var(--ink); flex:none; margin-top:2px;}
+  .footer-addr{color:var(--slate); font-size:14.5px; line-height:1.8;}
+  .footer-addr a{color:var(--ink-soft);}
+  .footer-addr a:hover{color:var(--brass-deep);}
+  .addr-line{display:flex; gap:10px; align-items:flex-start; margin-bottom:12px;}
+  .addr-line svg{flex:none; margin-top:4px;}
+  .footer-services h4{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--brass-deep); margin-bottom:18px;
+  }
+  .footer-services ul{list-style:none; columns:2; gap:20px;}
+  .footer-services li{margin-bottom:10px; font-size:14px;}
+  .footer-services a{color:var(--ink-soft);}
+  .footer-services a:hover{color:var(--brass-deep);}
+  .footer-bottom{
+    border-top:1px solid var(--line); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--slate);
+  }
+  .footer-social{display:flex; gap:16px;}
+  .footer-social a{color:var(--slate);}
+  .footer-social a:hover{color:var(--brass-deep);}
+
+  /* ===== Responsive ===== */
+  @media (max-width:940px){
+    nav.primary{display:none;}
+    .navtoggle{display:block;}
+    .hero .wrap{grid-template-columns:1fr; padding-top:56px;}
+    .hero-seal-wrap{order:-1;}
+    .hero-seal-wrap .seal{width:180px;}
+    .about-grid, .cb-grid, .footer-top{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .process-grid{grid-template-columns:1fr;}
+    .leader-card{grid-template-columns:1fr; text-align:center; justify-items:center;}
+    .ledger-row{grid-template-columns:44px 1fr; row-gap:8px;}
+    .ledger-mark{grid-column:1 / span 2; justify-self:start;}
+    .ledger-desc{grid-column:1 / span 2;}
+  }
+</style>
+</head>
+<body>
+
+<div class="letterhead">
+  <div class="wrap">
+    <span>ELITE CONSULTANTS &nbsp;·&nbsp; ACCOUNTING, SECRETARIAL &amp; LEGAL CONSULTANCY &nbsp;·&nbsp; NEW DELHI
+      <svg class="flag-in" width="18" height="12" viewBox="0 0 18 12" aria-label="India" style="display:inline-block; vertical-align:middle; margin-left:6px; border:0.5px solid rgba(220,227,238,0.35);">
+        <rect width="18" height="4" y="0" fill="#FF9933"/>
+        <rect width="18" height="4" y="4" fill="#FFFFFF"/>
+        <rect width="18" height="4" y="8" fill="#138808"/>
+        <circle cx="9" cy="6" r="1.4" fill="none" stroke="#000080" stroke-width="0.35"/>
+      </svg>
+    </span>
+    <a href="mailto:info@eliteconsultants.co.in">info@eliteconsultants.co.in</a>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <img class="seal" src="logo.jpg" alt="Elite Consultants logo">
+      <div>
+        <div class="brand-name">Elite Consultants</div>
+        <div class="brand-sub">Accounting, Secretarial &amp; Legal Consultancy</div>
+      </div>
+    </div>
+    <nav class="primary" aria-label="Primary">
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#leadership">Leadership</a></li>
+        <li><a href="#testimonials">Clients</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="btn solid">Request a Call Back</a>
+    <button class="navtoggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Est. 2009</div>
+      <h1>Your Compliance &amp; <em>Advisory</em> Partner</h1>
+      <p class="lede">Elite Consultants is committed to intelligent regulatory compliance and advisory solutions — a trustworthy guide through regulatory complexity and tax challenges, so you can stay focused on what you built your business to do.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn solid">Request a Call Back</a>
+        <a href="#services" class="btn">Our Services</a>
+      </div>
+    </div>
+    <div class="hero-seal-wrap">
+      <img class="seal" src="logo.jpg" alt="Elite Consultants seal">
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Welcome</div>
+        <h2>Welcome to Elite Consultants</h2>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>We are adroitly committed to providing you with intelligent regulatory compliance and advisory solutions.</p>
+        <p>By being your trustworthy guide through regulatory complexity and tax challenges, we help you achieve your strategic objectives — with the transparency and rigour that comes from proper chartered accountancy practice.</p>
+      </div>
+      <div>
+        <p>Whatever stage your business is at — a first-generation startup, an established manufacturer, or a foreign subsidiary entering India — our advisors bring the same discipline to your books, your filings and your growth plans.</p>
+        <p>Founded in 2009 and headquartered in Dwarka, New Delhi, our practice has grown alongside the businesses we serve — from a small compliance desk into a full-service consultancy spanning accounting, taxation, valuation, secretarial practice and RERA advisory, without losing the partner-led attention a founder expects from their CA firm.</p>
+        <div class="about-links">
+          <a href="#services" class="btn">All Services</a>
+          <a href="#contact" class="btn">Download Company Profile</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-mark">01</div>
+        <h4>Partner-led engagements</h4>
+        <p>You work directly with a senior advisor, not a rotating desk — the same partner who signs your filings answers your calls.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-mark">02</div>
+        <h4>Sector-specific experience</h4>
+        <p>From bulk drug exporters to RERA-registered developers, our advice is grounded in how your industry actually operates.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-mark">03</div>
+        <h4>Compliance first, always</h4>
+        <p>Every recommendation is built to hold up under scrutiny — from statutory audit to a departmental notice.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-mark">04</div>
+        <h4>Plain-language advisory</h4>
+        <p>No jargon left unexplained. You should understand every filing and figure with your name on it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ledger" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Schedule of Services</div>
+        <h2>What we bring to you</h2>
+      </div>
+      <p>Seven practice areas, one accountable partner for each engagement. Select a line item for a short description.</p>
+    </div>
+    <div class="ledger-list" id="ledgerList">
+      <div class="ledger-row">
+        <div class="ledger-num">01</div>
+        <div class="ledger-name">Accounting &amp; Financial Management</div>
+        <button class="ledger-mark" aria-expanded="false">View</button>
+        <div class="ledger-desc">Guiding you through the maze of regulatory requirements and building trust with investors and stakeholders through transparency and corporate governance.</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num">02</div>
+        <div class="ledger-name">Taxation</div>
+        <button class="ledger-mark" aria-expanded="false">View</button>
+        <div class="ledger-desc">Expert advice on using your tax liability to enhance business growth, with adept advisors providing invaluable financial and legal guidance.</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num">03</div>
+        <div class="ledger-name">Valuation &amp; Restructuring</div>
+        <button class="ledger-mark" aria-expanded="false">View</button>
+        <div class="ledger-desc">We help create value through corporate restructuring and improve company performance — making you more competitive and better organised.</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num">04</div>
+        <div class="ledger-name">De-Risking Business</div>
+        <button class="ledger-mark" aria-expanded="false">View</button>
+        <div class="ledger-desc">Risk management is crucial in an increasingly complex and transparent business world — we move you beyond an informal, ad-hoc approach.</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num">05</div>
+        <div class="ledger-name">RERA Consultancy</div>
+        <button class="ledger-mark" aria-expanded="false">View</button>
+        <div class="ledger-desc">End-to-end guidance on RERA registration and compliance for real estate developers and agents operating in the National Capital Region.</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num">06</div>
+        <div class="ledger-name">Outsourcing Accounting</div>
+        <button class="ledger-mark" aria-expanded="false">View</button>
+        <div class="ledger-desc">Trust our team of accountants with bookkeeping and accounting responsibilities, so you can focus on core competencies and profit generation.</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num">07</div>
+        <div class="ledger-name">Secretarial Practices</div>
+        <button class="ledger-mark" aria-expanded="false">View</button>
+        <div class="ledger-desc">Company secretarial support covering statutory registers, filings and board compliance, keeping your entity in good standing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">How We Work</div>
+        <h2>From first call to filed return</h2>
+      </div>
+      <p>A straightforward engagement process, whether you're onboarding for the first time or bringing us in mid-year.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Initial consultation</h4>
+        <p>We hear out your current setup, pain points and goals — no cost, no obligation.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Assessment &amp; scoping</h4>
+        <p>We review your books, filings and structure, then propose a clear scope and fee.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Onboarding &amp; implementation</h4>
+        <p>Your dedicated partner and team take over the relevant filings, records or advisory work.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>Ongoing partnership</h4>
+        <p>Regular check-ins, deadline reminders and proactive advice as your business changes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sectors">
+  <div class="wrap">
+    <div class="eyebrow">Served Sectors</div>
+    <h2 style="margin:12px 0 28px; font-size:26px;">Industries we work with</h2>
+    <div class="chip-row">
+      <span class="chip">Chemical Companies</span>
+      <span class="chip">FMCG Companies</span>
+      <span class="chip">Foreign Subsidiary Companies</span>
+      <span class="chip">Hospitals &amp; Healthcare</span>
+      <span class="chip">Manufacturing Companies</span>
+      <span class="chip">Other Service Sector Organisations</span>
+      <span class="chip">Overseas Consultancies</span>
+      <span class="chip">SME Engineering Companies</span>
+      <span class="chip">Startups</span>
+      <span class="chip">Trusts &amp; NGOs</span>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div><div class="stat-num">500+</div><div class="stat-label">Satisfied Clients</div></div>
+      <div><div class="stat-num">10+</div><div class="stat-label">Networks</div></div>
+      <div><div class="stat-num">8+</div><div class="stat-label">Services</div></div>
+      <div><div class="stat-num">25+</div><div class="stat-label">Team</div></div>
+      <div><div class="stat-num">12+</div><div class="stat-label">Industries Served</div></div>
+      <div><div class="stat-num">30+</div><div class="stat-label">Seminars Conducted</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="leader" id="leadership">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Our Team</div>
+        <h2>Meet Our Leadership</h2>
+      </div>
+    </div>
+    <div class="leader-card">
+      <img class="leader-portrait" src="pradeep-sethi.jpg" alt="Pradeep Sethi, Managing Partner">
+      <div class="leader-info">
+        <h3>Pradeep Sethi</h3>
+        <div class="leader-credentials">M.Com, MBA &amp; LLB</div>
+        <div class="leader-role">Managing Partner</div>
+        <p>Pradeep Sethi leads Elite Consultants' New Delhi practice, setting the firm's standard for rigorous, transparent client service across audit, taxation and financial advisory engagements.</p>
+      </div>
+    </div>
+    <p class="leader-note">Supported by a team of 25+ professionals across accounting, taxation, secretarial practice and advisory — every engagement is reviewed personally by a partner before it reaches you.</p>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Testimonial &amp; Partners</div>
+        <h2>What our clients say</h2>
+      </div>
+    </div>
+    <div class="t-scroll">
+      <div class="t-card">
+        <div class="t-mark">&rdquo;</div>
+        <p class="t-quote">We have enjoyed our relationship with Elite Consultants since 2017. They have handled our audit and taxation and helped us through major changes in the business, always meeting deadlines with first-class service.</p>
+        <div class="t-name">Dharmin Patel</div>
+        <div class="t-role">Bulk Drug Manufacturer &amp; Exporter</div>
+      </div>
+      <div class="t-card">
+        <div class="t-mark">&rdquo;</div>
+        <p class="t-quote">Elite Consultants has provided invaluable advice on tax planning and legal matters. The team is professional and expert in their respective domains — we always recommend them.</p>
+        <div class="t-name">Sagar Parmar</div>
+        <div class="t-role">Online E-Commerce</div>
+      </div>
+      <div class="t-card">
+        <div class="t-mark">&rdquo;</div>
+        <p class="t-quote">My compliments to the team for their valuable support and time on our filings, and for personally reviewing our investments. A scrutiny on my income tax was handled in a professional, systematic manner.</p>
+        <div class="t-name">Rajesh Rochwani</div>
+        <div class="t-role">Textile Trader</div>
+      </div>
+      <div class="t-card">
+        <div class="t-mark">&rdquo;</div>
+        <p class="t-quote">Over the last four years the team has provided excellent accounting services and specialist tax advice — knowledgeable, reliable and proactive as our business has grown and evolved.</p>
+        <div class="t-name">Haresh Kumar Lalvani</div>
+        <div class="t-role">Textile Manufacturer</div>
+      </div>
+      <div class="t-card">
+        <div class="t-mark">&rdquo;</div>
+        <p class="t-quote">We've faced many issues with Income Tax and GST filings over twelve years in business. In the last three years, every problem has been resolved with the best support and guidance.</p>
+        <div class="t-name">Vishal Raval</div>
+        <div class="t-role">Interior Design</div>
+      </div>
+      <div class="t-card">
+        <div class="t-mark">&rdquo;</div>
+        <p class="t-quote">Not just our CA firm, but a mentor to our business — pro with the numbers and always helping us plan toward our long-term goals.</p>
+        <div class="t-name">Prashant Pathak</div>
+        <div class="t-role">HVAC Manufacturer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Common Questions</div>
+        <h2>Frequently asked</h2>
+      </div>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="faq-row">
+        <button class="faq-q" aria-expanded="false"><span>What industries do you typically work with?</span><span class="plus">+</span></button>
+        <div class="faq-a">We advise across manufacturing, chemicals, FMCG, healthcare, real estate, trusts &amp; NGOs, engineering SMEs and foreign subsidiaries entering India — see the full list of sectors above.</div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" aria-expanded="false"><span>Do you work with foreign subsidiary companies setting up in India?</span><span class="plus">+</span></button>
+        <div class="faq-a">Yes. We regularly guide overseas parent companies and their Indian subsidiaries through entity setup, statutory compliance and ongoing tax and secretarial obligations.</div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" aria-expanded="false"><span>How are your fees structured?</span><span class="plus">+</span></button>
+        <div class="faq-a">Fees depend on the scope — a one-time filing, a retained monthly engagement, or a project like restructuring or valuation. We share a clear quote after the initial consultation, before any work begins.</div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" aria-expanded="false"><span>Can you help if I've already received a tax notice?</span><span class="plus">+</span></button>
+        <div class="faq-a">Yes — we regularly represent clients in income tax scrutiny and GST matters, from responding to notices through to resolution.</div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" aria-expanded="false"><span>Do you handle RERA registration for real estate developers?</span><span class="plus">+</span></button>
+        <div class="faq-a">Yes — end-to-end RERA registration and ongoing compliance for developers and agents operating in the National Capital Region.</div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" aria-expanded="false"><span>How quickly can you take on a new client?</span><span class="plus">+</span></button>
+        <div class="faq-a">Most engagements can begin within a few days of the initial consultation, though urgent matters — like a pending deadline or notice — are prioritised immediately.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="callback" id="contact">
+  <div class="wrap cb-grid">
+    <div>
+      <div class="eyebrow">Support</div>
+      <h2>Request a Call Back</h2>
+      <p>Tell us what you need and a partner from Elite Consultants will get in touch — no obligation, no jargon.</p>
+      <div class="cb-services">
+        <span>Accounting &amp; Financial Management</span>
+        <span>Taxation</span>
+        <span>Valuation &amp; Restructuring</span>
+        <span>De-Risking Business</span>
+        <span>RERA Consultancy</span>
+        <span>Outsourcing Accounting</span>
+        <span>Secretarial Practices</span>
+      </div>
+    </div>
+    <form class="cb-form" onsubmit="return false;">
+      <div class="field">
+        <label for="cbName">Full name</label>
+        <input id="cbName" type="text" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="cbPhone">Phone number</label>
+        <input id="cbPhone" type="tel" placeholder="+91 XXXXX XXXXX" required>
+      </div>
+      <div class="field">
+        <label for="cbMsg">How can we help?</label>
+        <textarea id="cbMsg" placeholder="Briefly describe what you need"></textarea>
+      </div>
+      <button class="btn solid" type="submit">Submit Request</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img class="seal" src="logo.jpg" alt="Elite Consultants logo">
+          <div>
+            <div class="brand-name">Elite Consultants</div>
+            <div class="brand-sub">Accounting, Secretarial &amp; Legal Consultancy</div>
+          </div>
+        </div>
+        <div class="footer-addr">
+          <div class="addr-line">
+            <svg class="icon-pin" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C7.86 2 4.5 5.36 4.5 9.5c0 5.5 6.2 11.6 7.02 12.38a.66.66 0 0 0 .96 0C13.3 21.1 19.5 15 19.5 9.5 19.5 5.36 16.14 2 12 2z" fill="#C0392B"/><circle cx="12" cy="9.5" r="2.75" fill="#F6F2E9"/></svg>
+            <span>No. 333, 2nd Floor, Greenview Apartments,<br>
+            Sector-19 Pocket-2, Dwarka,<br>
+            New Delhi – 110075</span>
+          </div>
+          <div class="addr-line">
+            <svg class="icon-phone" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 2.5 9.3 8.1 6.9 10.5c1 2.3 3.3 4.6 5.6 5.6l2.4-2.4 5.6 2.7-.9 3.9c-.2.9-1 1.5-1.9 1.4-4.6-.5-9-2.7-12.3-6C1.9 12.4-.3 8 .2 3.4c.1-.9.7-1.7 1.6-1.9l4.8-.9z" fill="#1E8449"/></svg>
+            <span><a href="tel:+919891901048">+91-98919 01048</a> &nbsp;/&nbsp; <a href="tel:+919599911048">+91-95999 11048</a></span>
+          </div>
+          <a href="mailto:info@eliteconsultants.co.in">info@eliteconsultants.co.in</a>
+        </div>
+      </div>
+      <div class="footer-services">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Accounting &amp; Financial Management</a></li>
+          <li><a href="#services">Taxation</a></li>
+          <li><a href="#services">Valuation &amp; Restructuring</a></li>
+          <li><a href="#services">De-Risking Business</a></li>
+          <li><a href="#services">RERA Consultancy</a></li>
+          <li><a href="#services">Outsourcing Accounting</a></li>
+          <li><a href="#services">Secretarial Practices</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Elite Consultants. All rights reserved.</span>
+      <div class="footer-social" aria-label="Social links">
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="LinkedIn">IN</a>
+        <a href="#" aria-label="Twitter">X</a>
+        <a href="#" aria-label="Instagram">IG</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Ledger row expand/collapse
+  document.querySelectorAll('.ledger-row').forEach(function(row){
+    var btn = row.querySelector('.ledger-mark');
+    btn.addEventListener('click', function(){
+      var isOpen = row.classList.contains('open');
+      document.querySelectorAll('.ledger-row.open').forEach(function(r){
+        if(r !== row){ r.classList.remove('open'); r.querySelector('.ledger-mark').setAttribute('aria-expanded','false'); r.querySelector('.ledger-mark').textContent='View'; }
+      });
+      row.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      btn.textContent = !isOpen ? 'Close' : 'View';
+    });
+  });
+
+  // FAQ expand/collapse
+  document.querySelectorAll('.faq-row').forEach(function(row){
+    var btn = row.querySelector('.faq-q');
+    btn.addEventListener('click', function(){
+      var isOpen = row.classList.contains('open');
+      document.querySelectorAll('.faq-row.open').forEach(function(r){
+        if(r !== row){ r.classList.remove('open'); r.querySelector('.faq-q').setAttribute('aria-expanded','false'); }
+      });
+      row.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  // Mobile nav toggle
+  var toggle = document.querySelector('.navtoggle');
+  var nav = document.querySelector('nav.primary');
+  toggle.addEventListener('click', function(){
+    var open = nav.style.display === 'block';
+    nav.style.display = open ? 'none' : 'block';
+    if(!open){
+      nav.style.position='absolute'; nav.style.top='100%'; nav.style.left='0'; nav.style.right='0';
+      nav.style.background='var(--paper)'; nav.style.borderBottom='1px solid var(--line)'; nav.style.padding='20px 32px';
+      nav.querySelector('ul').style.flexDirection='column'; nav.querySelector('ul').style.gap='16px';
+    }
+  });
+</script>
+
+</body>
+</html>
